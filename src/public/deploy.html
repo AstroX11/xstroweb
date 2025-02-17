@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XSTRO</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Atkinson Hyperlegible Mono", monospace;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      transition: background-color 0.3s, color 0.3s;
+      padding: 2rem 0;
+    }
+
+    .d-flex {
+      display: flex;
+    }
+
+    .justify-content-center {
+      justify-content: center;
+    }
+
+    .align-items-center {
+      align-items: center;
+    }
+
+    .light-theme {
+      background-color: #d7d7d7;
+      color: #000;
+    }
+
+    .dark-theme {
+      background-color: #100f0f;
+      color: #d7d7d7;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.5));
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: color 0.3s, border-color 0.3s;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .light-theme .theme-toggle {
+      color: #000;
+      border-color: #000;
+    }
+
+    .dark-theme .theme-toggle {
+      color: #fafafa;
+      border-color: #fafafa;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logo-text {
+      font-size: 5em;
+      font-weight: bold;
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      max-width: 100%;
+    }
+
+    section h2 {
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    .list {
+      list-style: decimal;
+      font-size: 1rem;
+      margin: 0 0 30px 40px;
+      text-align: left;
+    }
+
+    .list li {
+      margin: 12px 0;
+    }
+
+    .light-theme a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 900;
+    }
+
+    .dark-theme a {
+      text-decoration: none;
+      color: #ccc;
+      font-weight: 900;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 50px;
+      padding: 15px 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .light-theme .btn {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .dark-theme .btn {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .light-theme .btn:hover {
+      background-color: #333;
+    }
+
+    .dark-theme .btn:hover {
+      background-color: #ccc;
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+    }
+
+    pre {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      .logo-text {
+        font-size: 3em;
+        margin-bottom: 25px;
+      }
+
+      section {
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      section h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      .list {
+        font-size: 0.9rem;
+        margin-left: 25px;
+      }
+
+      .btn {
+        padding: 10px 30px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="d-flex justify-content-center light-theme">
+  <div class="container">
+    <strong class="logo-text">DEPLOYMENTS</strong>
+
+    <!-- Heroku Deployment Section -->
+    <section>
+      <h2>Heroku Deploy</h2>
+      <ol class="list">
+        <li><a href="https://signup.heroku.com/">Create an Heroku Account</a></li>
+        <li>
+          <b>Setup Environment Variables:</b><br>
+          SESSION_ID, BOT_INFO, SUDO, STICKER_PACK, WARN_COUNT, and TIME_ZONE.
+        </li>
+      </ol>
+      <p>Once you have understood the above steps, click the button below.</p>
+      <div class="button-group">
+        <a href="https://www.heroku.com/deploy?template=https://github.com/AstroX11/Xstro">
+          <button type="button" class="btn">Deploy</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Koyeb Deployment Section -->
+    <section>
+      <h2>Koyeb Deploy</h2>
+      <ol class="list">
+        <li><a href="https://app.koyeb.com/auth/signup">Create an Koyeb Account</a></li>
+        <li>
+          <b>Setup Environment Variables:</b><br>
+          SESSION_ID, BOT_INFO, SUDO, STICKER_PACK, WARN_COUNT, and TIME_ZONE.
+        </li>
+      </ol>
+      <p>Once you have understood the above steps, click the button below.</p>
+      <div class="button-group">
+        <a href="https://app.koyeb.com/services/deploy?type=git&builder=dockerfile&repository=https://github.com/AstroX11/Xstro&branch=master&name=xstro&env%5BSESSION_ID%5D=null&env%5BSUDO%5D=null&env%5BBOT_INFO%5D=%CE%B1%D1%95%D1%82%D1%8F%CF%83%CF%8711;%CF%87%D1%95%D1%84%D1%8F%CF%83%20%D0%BC%E2%88%82&env%5BSTICKER_PACK%5D=%D0%BC%CE%B1%E2%88%82%D1%94%20%D0%B1%D1%83;%CF%87%D1%95%D1%84%D1%8F%CF%83%20%D0%BC%CF%85%E2%84%93%D1%82%CE%B9%20%E2%88%82%D1%94%CE%BD%CE%B9%C2%A2%D1%94%20%D0%B2%CF%83%D1%82&env%5BWARN_COUNT%5D=3&env%5BTIME_ZONE%5D=Africa/Lagos">
+          <button type="button" class="btn">Deploy</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Render Deployment Section -->
+    <section>
+      <h2>Render Deploy</h2>
+      <ol class="list">
+        <li><a href="https://dashboard.render.com/register">Create a Render Account</a></li>
+        <li>
+          <b>Setup Environment Variables:</b><br>
+          SESSION_ID, BOT_INFO, SUDO, STICKER_PACK, WARN_COUNT, and TIME_ZONE.
+        </li>
+        <li><b>Deploy Blueprint</b> and wait for the bot to start.</li>
+        <li>Copy the deployed URL.</li>
+        <li>
+          <b>To ensure uptime, set up a monitor using Better Stack:</b><br>
+          <a href="https://betterstack.com/users/sign-up">SignUp</a> OR 
+          <a href="https://betterstack.com/users/sign-in#magic">Login</a>
+        </li>
+        <li>In Better Stack, create a monitor with your deployed URL (pings every 5 minutes).</li>
+      </ol>
+      <p>Once you have understood the above steps, click the button below.</p>
+      <div class="button-group">
+        <a href="https://render.com/deploy?repo=https://github.com/AstroX11/Xstro">
+          <button type="button" class="btn">Deploy</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Local Deployment Section -->
+    <section>
+      <h2>Local Deployment (Windows/Linux/macOS)</h2>
+      <ol class="list">
+        <li>
+          <b>Install Node.js</b><br>
+          <u>Windows:</u><br>
+          <a href="https://nodejs.org/">Download Node.js</a> and install it. Verify installation:
+          <pre>node -v
+npm -v</pre>
+          <u>Linux:</u><br>
+          <pre>curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+node -v
+npm -v</pre>
+          <u>macOS:</u><br>
+          <pre>brew install node
+node -v
+npm -v</pre>
+        </li>
+        <li>
+          <b>Install FFmpeg</b><br>
+          <u>Windows:</u><br>
+          <a href="https://ffmpeg.org/download.html">Download FFmpeg</a>, extract it, and add the bin folder to your PATH. Verify installation:
+          <pre>ffmpeg -version</pre>
+          <u>Linux:</u><br>
+          <pre>sudo apt update && sudo apt install ffmpeg
+ffmpeg -version</pre>
+          <u>macOS:</u><br>
+          <pre>brew install ffmpeg
+ffmpeg -version</pre>
+        </li>
+        <li>
+          <b>Install Yarn</b><br>
+          Install globally:
+          <pre>npm install -g yarn
+yarn -v</pre>
+        </li>
+        <li>
+          <b>Install Git</b><br>
+          <u>Windows:</u><br>
+          <a href="https://git-scm.com/">Download Git</a> and install it. Verify installation:
+          <pre>git --version</pre>
+          <u>Linux:</u><br>
+          <pre>sudo apt update && sudo apt install git
+git --version</pre>
+          <u>macOS:</u><br>
+          <pre>brew install git
+git --version</pre>
+        </li>
+        <li>
+          <b>Setup and Run</b><br>
+          Open a terminal and execute the following commands:
+          <pre>git clone https://github.com/AstroX11/Xstro.git
+cd Xstro
+yarn install
+npm start</pre>
+        </li>
+      </ol>
+    </section>
+  </div>
+
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+      document.body.classList.toggle('dark-theme');
+    }
+  </script>
+</body>
+</html>
